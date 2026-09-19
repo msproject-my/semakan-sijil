@@ -1,0 +1,675 @@
+```html
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEMAKAN SIJIL PENYERTAAN - BENGKEL CONQUER EXAM WITH CASIO SCIENTIFIC CALCULATOR</title>
+  
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              800: '#3730a3',
+              900: '#312e81',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    @keyframes fadeInScale {
+      0% { opacity: 0; transform: scale(0.97) translateY(8px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .animate-result {
+      animation: fadeInScale 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 via-slate-100 to-indigo-50/40 min-h-screen text-slate-800 flex flex-col justify-between font-sans antialiased selection:bg-brand-500 selection:text-white">
+
+  <!-- Header Bar -->
+  <header class="w-full bg-white/90 backdrop-blur-md border-b border-slate-200/80 sticky top-0 z-20 shadow-sm">
+    <div class="max-w-4xl mx-auto px-4 py-3.5 sm:px-6 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-indigo-500 text-white flex items-center justify-center shadow-md shadow-brand-500/20 flex-shrink-0">
+          <i class="fa-solid fa-award text-lg"></i>
+        </div>
+        <div>
+          <h1 class="text-sm sm:text-base font-bold text-slate-900 leading-tight">E-Sijil Digital</h1>
+          <p class="text-xs text-slate-500 hidden sm:block">Bengkel Conquer Exam With Casio Scientific Calculator</p>
+        </div>
+      </div>
+      <div class="flex items-center">
+        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span> Sistem Aktif
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-4xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-12 flex-1">
+    
+    <!-- Hero Banner -->
+    <div class="text-center max-w-2xl mx-auto mb-8">
+      <div class="inline-flex items-center justify-center py-1.5 px-4 bg-indigo-50 text-brand-700 rounded-full mb-3 text-xs font-semibold uppercase tracking-wider shadow-sm border border-indigo-100">
+        <i class="fa-solid fa-certificate mr-2"></i> Pengambilan Sijil Rasmi
+      </div>
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight uppercase leading-tight">
+        SEMAKAN SIJIL PENYERTAAN
+      </h2>
+      <h3 class="text-base sm:text-lg font-bold text-brand-600 mt-1 uppercase">
+        BENGKEL CONQUER EXAM WITH CASIO SCIENTIFIC CALCULATOR
+      </h3>
+      <p class="text-sm sm:text-base text-slate-600 mt-2.5">
+        Sila masukkan nombor kad pengenalan anda untuk membuat semakan rekod dan memuat turun e-sijil.
+      </p>
+    </div>
+
+    <!-- Search Form Card -->
+    <div class="bg-white rounded-2xl shadow-xl shadow-slate-200/60 border border-slate-200/80 p-6 sm:p-8 max-w-xl mx-auto">
+      <form id="searchForm" onsubmit="handleSearch(event)" class="space-y-4">
+        <div>
+          <label for="icInput" class="block text-sm font-semibold text-slate-700 mb-1.5">
+            Nombor Kad Pengenalan (No. KP)
+          </label>
+          <div class="relative rounded-xl shadow-sm">
+            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <i class="fa-solid fa-id-card"></i>
+            </div>
+            <input 
+              type="text" 
+              id="icInput" 
+              name="nokp" 
+              maxlength="14"
+              autocomplete="off"
+              placeholder="Contoh: 950101015555" 
+              class="block w-full pl-10 pr-10 py-3 text-base sm:text-sm bg-slate-50 border border-slate-300 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition font-medium tracking-wide text-slate-800 placeholder-slate-400"
+              required
+            >
+            <button 
+              type="button" 
+              id="clearInputIconBtn" 
+              onclick="clearSearch()"
+              title="Kosongkan input"
+              class="hidden absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 transition"
+            >
+              <i class="fa-solid fa-circle-xmark text-base"></i>
+            </button>
+          </div>
+          <p class="mt-2 text-xs text-slate-500 flex items-center gap-1.5">
+            <i class="fa-solid fa-circle-info text-brand-600"></i>
+            <span>Format nombor sahaja tanpa tanda sempang (contoh: <strong>950101015555</strong>).</span>
+          </p>
+        </div>
+
+        <!-- Buttons Group (Melintang / Side-by-Side) -->
+        <div class="grid grid-cols-2 gap-3 pt-2">
+          <button 
+            type="submit" 
+            id="submitBtn" 
+            class="w-full inline-flex justify-center items-center px-4 py-3 rounded-xl shadow-md text-sm font-semibold text-white bg-brand-600 hover:bg-brand-700 active:bg-brand-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500 transition"
+          >
+            <span id="submitSpinner" class="hidden mr-2">
+              <i class="fa-solid fa-circle-notch fa-spin"></i>
+            </span>
+            <span id="submitText">
+              <i class="fa-solid fa-magnifying-glass mr-1.5"></i> Semak Sekarang
+            </span>
+          </button>
+
+          <button 
+            type="button" 
+            id="clearBtn" 
+            onclick="clearSearch()" 
+            class="w-full inline-flex justify-center items-center px-4 py-3 rounded-xl border border-slate-300 text-sm font-semibold text-slate-700 bg-white hover:bg-slate-50 active:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-300 transition"
+          >
+            <i class="fa-solid fa-rotate-left mr-1.5"></i> Semak Semula
+          </button>
+        </div>
+      </form>
+
+      <!-- Peringatan Pop-up Blocker Sentiasa Terpapar -->
+      <div class="mt-4 p-3 bg-amber-50/90 border border-amber-200/80 rounded-xl text-center">
+        <p class="text-xs text-amber-800 flex items-center justify-center gap-1.5 font-medium">
+          <i class="fa-solid fa-triangle-exclamation text-amber-600 flex-shrink-0"></i>
+          <span><strong>Perhatian:</strong> Sila pastikan pelayar anda membenarkan <em>pop-up</em> (nyahaktifkan <em>pop-up blocker</em>) sekiranya muat turun atau paparan sijil disekat.</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Result Container -->
+    <div id="resultContainer" class="mt-8 max-w-xl mx-auto hidden">
+
+      <!-- Not Found State -->
+      <div id="notFoundBox" class="hidden bg-rose-50/90 border border-rose-200 rounded-2xl p-6 text-rose-800 shadow-sm animate-result">
+        <div class="flex items-start space-x-4">
+          <div class="w-10 h-10 rounded-full bg-rose-100 flex items-center justify-center flex-shrink-0 text-rose-600 text-lg">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+          </div>
+          <div class="flex-1">
+            <h3 class="text-base font-bold text-rose-900">Maklumat Tidak Dijumpai</h3>
+            <p class="text-sm text-rose-700 mt-1 font-semibold leading-relaxed">
+              Maklumat tiada dalam senarai maklumat pendaftaran.
+            </p>
+            <p class="text-xs text-rose-600 mt-2">
+              Sila pastikan nombor kad pengenalan yang dimasukkan adalah tepat tanpa tanda sempang.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Found State Card -->
+      <div id="foundBox" class="hidden bg-white rounded-2xl shadow-xl shadow-slate-200/70 border border-slate-200 p-6 sm:p-7 animate-result">
+        
+        <!-- Header Status -->
+        <div class="flex items-center justify-between pb-3.5 mb-4 border-b border-slate-100">
+          <div class="flex items-center space-x-2.5">
+            <span class="w-7 h-7 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-bold">
+              <i class="fa-solid fa-check"></i>
+            </span>
+            <span class="text-xs font-bold uppercase tracking-wider text-emerald-600">Pendaftaran Disahkan</span>
+          </div>
+          <span class="text-xs font-semibold text-slate-400">Status: Sedia</span>
+        </div>
+
+        <!-- Participant Details Table / Grid (Kemas & Melintang) -->
+        <div class="bg-slate-50/80 rounded-xl p-4 border border-slate-200/70 space-y-3">
+          <div>
+            <span class="text-xs font-medium text-slate-500 uppercase tracking-wider block">Nama Penuh Peserta</span>
+            <span id="displayName" class="text-base sm:text-lg font-bold text-slate-900 uppercase break-words block mt-0.5">
+              -
+            </span>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4 pt-2.5 border-t border-slate-200/60">
+            <div>
+              <span class="text-xs font-medium text-slate-500 uppercase tracking-wider block">No. Kad Pengenalan</span>
+              <span id="displayIC" class="text-sm font-bold text-slate-800 tracking-wide font-mono block mt-0.5">
+                -
+              </span>
+            </div>
+            <div>
+              <span class="text-xs font-medium text-slate-500 uppercase tracking-wider block">Status Sijil</span>
+              <span class="text-sm font-semibold text-emerald-600 inline-flex items-center gap-1 mt-0.5">
+                <i class="fa-solid fa-circle-check text-xs"></i> Dijumpai
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons (Melintang / Side-by-Side) -->
+        <div class="mt-6 grid grid-cols-2 gap-3">
+          <button 
+            type="button" 
+            id="previewBtn" 
+            onclick="openCertificatePreview()" 
+            class="inline-flex justify-center items-center px-4 py-3 rounded-xl border border-brand-600 text-sm font-semibold text-brand-600 bg-white hover:bg-brand-50 active:bg-brand-100 transition shadow-sm"
+          >
+            <i class="fa-solid fa-eye mr-2"></i> Preview Sijil
+          </button>
+
+          <a 
+            id="downloadBtn" 
+            href="#" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="inline-flex justify-center items-center px-4 py-3 rounded-xl text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 transition shadow-md shadow-emerald-600/20"
+          >
+            <i class="fa-solid fa-download mr-2"></i> Muat Turun Sijil
+          </a>
+        </div>
+
+        <!-- Pautan Sandaran Terus Jika Pop-up Disekat -->
+        <div class="mt-4 pt-3 border-t border-slate-200/60 text-center">
+          <a id="directViewLink" href="#" target="_blank" class="text-xs text-brand-600 underline hover:text-brand-800 font-medium inline-flex items-center gap-1">
+            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+            <span>Jika muat turun tidak bermula, klik di sini untuk buka pautan terus fail.</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Error State -->
+      <div id="errorBox" class="hidden bg-amber-50/90 border border-amber-200 rounded-2xl p-5 text-amber-900 shadow-sm animate-result">
+        <div class="flex items-start space-x-3">
+          <i class="fa-solid fa-circle-exclamation text-amber-600 text-lg mt-0.5 flex-shrink-0"></i>
+          <div>
+            <h4 class="text-sm font-bold text-amber-900">Ralat Sambungan</h4>
+            <p id="errorMessage" class="text-xs text-amber-700 mt-1">
+              Gagal menghubungi pangkalan data Google Sheet. Sila cuba lagi sebentar nanti.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Certificate Preview Modal -->
+  <div id="previewModal" class="fixed inset-0 z-50 hidden bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 transition-all">
+    <div class="bg-white w-full max-w-4xl h-[85vh] rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-slate-200">
+      
+      <!-- Modal Header -->
+      <div class="px-5 py-3.5 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+        <div class="flex items-center space-x-2">
+          <i class="fa-solid fa-file-invoice text-brand-600"></i>
+          <h3 class="text-sm font-bold text-slate-800">Pratonton Sijil Digital</h3>
+        </div>
+        <div class="flex items-center space-x-2">
+          <a 
+            id="modalDirectLink" 
+            href="#" 
+            target="_blank" 
+            class="text-xs px-3 py-1.5 bg-brand-50 text-brand-700 hover:bg-brand-100 font-medium rounded-lg transition"
+          >
+            <i class="fa-solid fa-arrow-up-right-from-square mr-1"></i> Buka Penuh
+          </a>
+          <button 
+            type="button" 
+            onclick="closeCertificatePreview()" 
+            class="text-slate-400 hover:text-slate-700 p-1.5 rounded-lg hover:bg-slate-200/60 transition"
+          >
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Modal Body (Iframe) -->
+      <div class="relative flex-1 bg-slate-100 overflow-hidden flex items-center justify-center">
+        <div id="iframeLoader" class="absolute inset-0 flex flex-col items-center justify-center bg-slate-100 text-slate-500 z-10">
+          <i class="fa-solid fa-spinner fa-spin text-2xl text-brand-600 mb-2"></i>
+          <span class="text-xs font-medium">Memuatkan pratonton sijil...</span>
+        </div>
+        <iframe 
+          id="certIframe" 
+          src="about:blank" 
+          class="w-full h-full border-0" 
+          onload="document.getElementById('iframeLoader').classList.add('hidden')"
+        ></iframe>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="px-5 py-3 bg-white border-t border-slate-200 flex items-center justify-between">
+        <span class="text-xs text-slate-500">Gunakan butang Muat Turun jika paparan tidak keluar.</span>
+        <button 
+          type="button" 
+          onclick="closeCertificatePreview()" 
+          class="px-4 py-2 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition"
+        >
+          Tutup
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="w-full bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
+    <div class="max-w-4xl mx-auto px-4">
+      <p>&copy; Sistem Pengurusan Sijil Digital. Hak Cipta Terpelihara.</p>
+    </div>
+  </footer>
+
+  <script>
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw6UVmjI7fBxlT7HR9KL6II5fcEx5fFb6pwjarIMq6SfbT8T4vZcPBUyD3mOplI9UD5/exec";
+
+    let currentRecord = null;
+
+    // DOM Elements
+    const icInput = document.getElementById('icInput');
+    const clearInputIconBtn = document.getElementById('clearInputIconBtn');
+    const submitBtn = document.getElementById('submitBtn');
+    const submitSpinner = document.getElementById('submitSpinner');
+    const submitText = document.getElementById('submitText');
+    const resultContainer = document.getElementById('resultContainer');
+    const notFoundBox = document.getElementById('notFoundBox');
+    const foundBox = document.getElementById('foundBox');
+    const errorBox = document.getElementById('errorBox');
+    const errorMessage = document.getElementById('errorMessage');
+    const displayName = document.getElementById('displayName');
+    const displayIC = document.getElementById('displayIC');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const directViewLink = document.getElementById('directViewLink');
+    const previewModal = document.getElementById('previewModal');
+    const certIframe = document.getElementById('certIframe');
+    const modalDirectLink = document.getElementById('modalDirectLink');
+    const iframeLoader = document.getElementById('iframeLoader');
+
+    /* Auto format input - nombor sahaja */
+    icInput.addEventListener('input', function () {
+      const cleaned = this.value.replace(/[^0-9]/g, '');
+      this.value = cleaned;
+      clearInputIconBtn.classList.toggle('hidden', cleaned.length === 0);
+    });
+
+    /**
+     * Carian data daripada Google Apps Script Web App
+     */
+    async function handleSearch(event) {
+      if (event) event.preventDefault();
+
+      const rawIC = icInput.value.trim();
+      const cleanedIC = rawIC.replace(/[^0-9]/g, '');
+
+      if (!cleanedIC) {
+        icInput.focus();
+        return;
+      }
+
+      hideAllResults();
+      setLoading(true);
+
+      try {
+        const url = new URL(GOOGLE_SCRIPT_URL);
+        url.searchParams.set('nokp', cleanedIC);
+        url.searchParams.set('ic', cleanedIC);
+        url.searchParams.set('action', 'search');
+        url.searchParams.set('timestamp', new Date().getTime());
+
+        const response = await fetch(url.toString(), {
+          method: 'GET',
+          redirect: 'follow',
+        });
+
+        if (!response.ok) {
+          throw new Error(`Status tindak balas: ${response.status}`);
+        }
+
+        const data = await response.json();
+        processSearchResult(data, cleanedIC);
+
+      } catch (err) {
+        console.error("Carian gagal:", err);
+        showError("Gagal menghubungi pangkalan data. Sila pastikan sambungan internet stabil atau cuba lagi sebentar.");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    /**
+     * Memproses data JSON yang diterima
+     */
+    function processSearchResult(data, targetIC) {
+      let matchedRecord = null;
+
+      if (Array.isArray(data)) {
+        matchedRecord = data.find(item => {
+          if (typeof item === 'object' && item !== null) {
+            const rowIC = normalizeIC(findProp(item, ['nokp', 'no_kp', 'ic', 'no_kad_pengenalan', 'kad_pengenalan', 'nric', 'kp']));
+            return rowIC === targetIC;
+          }
+          return false;
+        });
+
+        if (matchedRecord) {
+          matchedRecord = extractNormalizedData(matchedRecord, targetIC);
+        }
+      } else if (typeof data === 'object' && data !== null) {
+        const innerData = data.data || data.record || data.result || data;
+
+        if (Array.isArray(innerData)) {
+          const found = innerData.find(item => {
+            const rowIC = normalizeIC(findProp(item, ['nokp', 'no_kp', 'ic', 'no_kad_pengenalan', 'kad_pengenalan', 'nric', 'kp']));
+            return rowIC === targetIC;
+          });
+          if (found) {
+            matchedRecord = extractNormalizedData(found, targetIC);
+          }
+        } else {
+          const foundName = findProp(innerData, ['nama', 'name', 'nama_penuh', 'peserta']);
+          const foundLink = findProp(innerData, ['attachment', 'sijil', 'link', 'url', 'file', 'sijil_url', 'pautan_sijil']);
+          const foundIC = normalizeIC(findProp(innerData, ['nokp', 'no_kp', 'ic', 'no_kad_pengenalan', 'kad_pengenalan', 'nric', 'kp'])) || targetIC;
+
+          if (data.status === 'not_found' || data.found === false || (!foundName && !foundLink)) {
+            matchedRecord = null;
+          } else {
+            matchedRecord = {
+              nama: foundName || 'Peserta',
+              nokp: foundIC,
+              sijil: foundLink || ''
+            };
+          }
+        }
+      }
+
+      if (matchedRecord && matchedRecord.nama) {
+        showFound(matchedRecord);
+      } else {
+        showNotFound();
+      }
+    }
+
+    /* Utiliti pencarian kunci JSON fleksibel */
+    function findProp(obj, possibleKeys) {
+      if (!obj || typeof obj !== 'object') return null;
+      const lowerKeys = Object.keys(obj).reduce((acc, k) => {
+        acc[k.toLowerCase().replace(/[^a-z0-9]/g, '')] = obj[k];
+        return acc;
+      }, {});
+
+      for (const key of possibleKeys) {
+        const cleanKey = key.toLowerCase().replace(/[^a-z0-9]/g, '');
+        if (lowerKeys[cleanKey] !== undefined && lowerKeys[cleanKey] !== null && String(lowerKeys[cleanKey]).trim() !== '') {
+          return String(lowerKeys[cleanKey]).trim();
+        }
+      }
+      return null;
+    }
+
+    function extractNormalizedData(item, fallbackIC) {
+      const nama = findProp(item, ['nama', 'name', 'nama_penuh', 'nama_peserta']) || 'Nama Tidak Dinyatakan';
+      const nokp = normalizeIC(findProp(item, ['nokp', 'no_kp', 'ic', 'no_kad_pengenalan', 'kad_pengenalan', 'kp'])) || fallbackIC;
+      const sijil = findProp(item, ['attachment', 'sijil', 'link', 'url', 'pautan', 'fail', 'file', 'link_sijil']) || '';
+      return { nama, nokp, sijil };
+    }
+
+    function normalizeIC(val) {
+      if (!val) return '';
+      return String(val).replace(/[^0-9]/g, '');
+    }
+
+    /**
+     * Memformat pautan Google Drive kepada preview dan download PDF langsung
+     */
+    function formatDriveUrls(originalUrl) {
+      if (!originalUrl) return { previewUrl: '#', downloadUrl: '#', directUrl: '#' };
+
+      const cleanUrl = originalUrl.trim();
+
+      // Format Google Slides
+      const slidesMatch = cleanUrl.match(/docs\.google\.com\/presentation\/d\/([a-zA-Z0-9_-]+)/);
+      if (slidesMatch && slidesMatch[1]) {
+        const fileId = slidesMatch[1];
+        return {
+          previewUrl: `https://docs.google.com/presentation/d/${fileId}/embed`,
+          downloadUrl: `https://docs.google.com/presentation/d/${fileId}/export/pdf`,
+          directUrl: `https://docs.google.com/presentation/d/${fileId}/view`
+        };
+      }
+
+      // Format Google Docs
+      const docsMatch = cleanUrl.match(/docs\.google\.com\/document\/d\/([a-zA-Z0-9_-]+)/);
+      if (docsMatch && docsMatch[1]) {
+        const fileId = docsMatch[1];
+        return {
+          previewUrl: `https://docs.google.com/document/d/${fileId}/preview`,
+          downloadUrl: `https://docs.google.com/document/d/${fileId}/export?format=pdf`,
+          directUrl: `https://docs.google.com/document/d/${fileId}/view`
+        };
+      }
+
+      // Format Fail Google Drive biasa (PDF/Gambar)
+      const driveMatch = cleanUrl.match(/(?:drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?id=)|drive\.google\.com\/.*[?&]id=)([a-zA-Z0-9_-]+)/);
+      if (driveMatch && driveMatch[1]) {
+        const fileId = driveMatch[1];
+        return {
+          previewUrl: `https://drive.google.com/file/d/${fileId}/preview`,
+          downloadUrl: `https://drive.usercontent.google.com/download?id=${fileId}&export=download`,
+          directUrl: `https://drive.google.com/file/d/${fileId}/view`
+        };
+      }
+
+      return {
+        previewUrl: cleanUrl,
+        downloadUrl: cleanUrl,
+        directUrl: cleanUrl
+      };
+    }
+
+    /**
+     * Paparan rekod ditemui
+     */
+    function showFound(record) {
+      currentRecord = record;
+      displayName.textContent = record.nama;
+      displayIC.textContent = formatICDisplay(record.nokp);
+
+      const urls = formatDriveUrls(record.sijil);
+      
+      if (record.sijil) {
+        downloadBtn.href = urls.downloadUrl;
+        directViewLink.href = urls.directUrl;
+        downloadBtn.removeAttribute('disabled');
+        downloadBtn.classList.remove('opacity-50', 'pointer-events-none');
+      } else {
+        downloadBtn.href = '#';
+        directViewLink.href = '#';
+        downloadBtn.setAttribute('disabled', 'true');
+        downloadBtn.classList.add('opacity-50', 'pointer-events-none');
+      }
+
+      resultContainer.classList.remove('hidden');
+      foundBox.classList.remove('hidden');
+      notFoundBox.classList.add('hidden');
+      errorBox.classList.add('hidden');
+
+      resultContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function showNotFound() {
+      currentRecord = null;
+      resultContainer.classList.remove('hidden');
+      notFoundBox.classList.remove('hidden');
+      foundBox.classList.add('hidden');
+      errorBox.classList.add('hidden');
+
+      resultContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function showError(msg) {
+      currentRecord = null;
+      errorMessage.textContent = msg;
+      resultContainer.classList.remove('hidden');
+      errorBox.classList.remove('hidden');
+      foundBox.classList.add('hidden');
+      notFoundBox.classList.add('hidden');
+    }
+
+    function hideAllResults() {
+      resultContainer.classList.add('hidden');
+      foundBox.classList.add('hidden');
+      notFoundBox.classList.add('hidden');
+      errorBox.classList.add('hidden');
+    }
+
+    function clearSearch() {
+      icInput.value = '';
+      currentRecord = null;
+      clearInputIconBtn.classList.add('hidden');
+      hideAllResults();
+      icInput.focus();
+    }
+
+    function formatICDisplay(ic) {
+      if (!ic) return '-';
+      const clean = ic.replace(/[^0-9]/g, '');
+      if (clean.length === 12) {
+        return `${clean.substring(0, 6)}-${clean.substring(6, 8)}-${clean.substring(8, 12)}`;
+      }
+      return clean;
+    }
+
+    function openCertificatePreview() {
+      if (!currentRecord || !currentRecord.sijil) {
+        showError('Pautan fail sijil tidak dijumpai bagi rekod ini.');
+        return;
+      }
+
+      const urls = formatDriveUrls(currentRecord.sijil);
+      iframeLoader.classList.remove('hidden');
+      certIframe.src = urls.previewUrl;
+      modalDirectLink.href = urls.directUrl || urls.previewUrl;
+      previewModal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCertificatePreview() {
+      previewModal.classList.add('hidden');
+      certIframe.src = 'about:blank';
+      document.body.style.overflow = 'auto';
+    }
+
+    previewModal.addEventListener('click', function(e) {
+      if (e.target === previewModal) {
+        closeCertificatePreview();
+      }
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && !previewModal.classList.contains('hidden')) {
+        closeCertificatePreview();
+      }
+    });
+
+    function setLoading(isLoading) {
+      if (isLoading) {
+        submitBtn.disabled = true;
+        submitSpinner.classList.remove('hidden');
+        submitText.innerHTML = 'Mencari...';
+      } else {
+        submitBtn.disabled = false;
+        submitSpinner.classList.add('hidden');
+        submitText.innerHTML = '<i class="fa-solid fa-magnifying-glass mr-1.5"></i> Semak Sekarang';
+      }
+    }
+  </script>
+</body>
+</html>
+```
